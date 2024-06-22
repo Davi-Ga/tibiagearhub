@@ -1,3 +1,5 @@
+![image](https://github.com/Davi-Ga/tibiagearhub-backend/assets/86674827/21ae9675-ffda-4188-9f13-7f102bdeae7c)
+
 # TibiaGearHub
 
 **Descrição:**
