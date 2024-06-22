@@ -1,0 +1,65 @@
+version: '5'
+
+networks:
+  tibiagearhub:
+    driver: bridge
+
+services:
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - tibiagearhub_db:/var/lib/postgresql/data/
+    environment:
+      - TZ=America/Sao_Paulo
+      - POSTGRES_DB=tibiagearhub
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=PEdCNGXwP9As75oiMnaonfQSpPSXib
+    networks:
+      - tibiagearhub
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - tibiagearhub_redis:/data
+    networks:
+      - tibiagearhub
+
+  api:
+    build: .
+    entrypoint: ['./entrypoints/api.sh']
+    container_name: tghtibia
+    ports:
+      - 5555:5555
+    networks:
+      - tibiagearhub
+    volumes:
+      - ./core:/app/core
+      - ./features:/app/features
+      - ./media:/app/media
+    env_file:
+      - ./.env
+    depends_on:
+      - "db"
+      - "redis"
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    entrypoint: ['./entrypoints/worker.sh']
+    volumes:
+      - ./core:/app/core
+      - ./features:/app/features
+      - ./media:/app/media
+    networks:
+      - tibiagearhub
+    env_file:
+      - ./.env
+    depends_on:
+      - "db"
+      - "redis"
+      - "api"
+
+volumes:
+  tibiagearhub_db:
+  tibiagearhub_redis:
