@@ -31,13 +31,31 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Original Django Apps
     'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django.contrib.postgres",
+    # Background Jobs
+    # "django_celery_results",
+    # "django_celery_beat",
+    # API
+    "rest_framework",
+    "corsheaders",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
+    # Core Configurations
+    "core.api",
+    "core.swagger",
+    # "core.jobs",
+    # Feature Apps
+    "features.hunt",
+    "features.item",
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
