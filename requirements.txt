@@ -15,3 +15,4 @@ djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
 django-json-widget==1.1.1
 django-image-uploader-widget==0.3.1
+requests
